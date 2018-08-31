@@ -1,18 +1,25 @@
 /* eslint-disable */
+import cidrOverlap from 'cidr-overlap';
 import isCidrInRange from './cidr-functions/isCidrInRange';
+import sortCidrAscending from './cidr-functions/sortCidrAscending';
+import {cidr} from 'node-cidr';
 
 export default function getAvailableCidrBlock(newCidrBlockSize, reservedIpRange, occupiedCidrBlocks) {
 
-    const availableAddress = reservedIpRange.startAddress;
+    let newCidrStartAddress = reservedIpRange.startAddress;
+    const sortedOccupiedCidrBlocks = sortCidrAscending(occupiedCidrBlocks);
 
-    // Sort the list.
+    sortedOccupiedCidrBlocks.forEach(block => {
+        const isInRange = isCidrInRange(reservedIpRange, block);
 
-    occupiedCidrBlocks.forEach(block => {
-        //check if block is within range. isCidrInRange();
-        //if true then see if it clashes with our available address. (cidr-overlap)
-        //if true then move our available address to the end of the current block.
-        //if our new available range is within the reserved range then continue
-        //if the new available range is not then throw an error that there is no space.
+        if (isInRange) {
+            const overlaps = cidrOverlap([block, newCidrStartAddress]).length > 0;
+
+            if(overlaps) newCidrStartAddress = cidr.next(block).split('/')[0];
+
+            if(!isCidrInRange(reservedIpRange, newCidrStartAddress)) throw new Error('No availability in the range provided');
+        }
     });
 
+    return `${newCidrStartAddress}/${newCidrBlockSize}`;
 }

@@ -1,10 +1,7 @@
 import IpCidr from 'ip-cidr';
 
 export default function isInRange(reservedRange, block) {
-    return (
-        startAddressIsInRange(reservedRange, block) &&
-    endAddressIsInRange(reservedRange, block)
-    );
+    return (startAddressIsInRange(reservedRange, block) && endAddressIsInRange(reservedRange, block));
 }
 
 function startAddressIsInRange(reservedRange, block) {

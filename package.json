@@ -10,7 +10,8 @@
     "aws-sdk": "^2.305.0",
     "cidr-matcher": "^1.0.5",
     "cidr-overlap": "^0.0.4",
-    "ip-cidr": "^2.0.0"
+    "ip-cidr": "^2.0.0",
+    "node-cidr": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
