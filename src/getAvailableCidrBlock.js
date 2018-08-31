@@ -1,9 +1,8 @@
-/* eslint-disable */
-import cidrOverlap from 'cidr-overlap';
 import isCidrInRange from './cidr-functions/isCidrInRange';
 import sortCidrAscending from './cidr-functions/sortCidrAscending';
 import getNextAddress from './cidr-functions/getNextAddress';
 import getEndAddress from './cidr-functions/getEndAddress';
+import cidrsAreOverlapping from './cidr-functions/cidrsAreOverlapping';
 
 export default function getAvailableCidrBlock(
     newCidrBlockSize,
@@ -17,10 +16,8 @@ export default function getAvailableCidrBlock(
         const isInRange = isCidrInRange(reservedIpRange, block);
 
         if (isInRange) {
-            const overlaps =
-                cidrOverlap([block, newCidrStartAddress]).length > 0;
-
-            if (overlaps) newCidrStartAddress = getNextAddress(block);
+            if (cidrsAreOverlapping([block, newCidrStartAddress]))
+                newCidrStartAddress = getNextAddress(block);
 
             if (
                 !isCidrInRange(

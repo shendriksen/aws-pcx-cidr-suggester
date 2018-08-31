@@ -1,7 +1,7 @@
 import getAvailableCidrBlock from './getAvailableCidrBlock';
 import IpRange from './cidr-functions/IpRange';
 
-describe.only('getAvailableCidrBlock', () => {
+describe('getAvailableCidrBlock', () => {
     it('should return an available cidr block when the reserved range is free', () => {
         const newCidrBlockSize = 24;
         const reservedIpRange = new IpRange('10.180.0.0', '10.200.0.0');
@@ -24,7 +24,6 @@ describe.only('getAvailableCidrBlock', () => {
         const newCidrBlockSize = 24;
         const reservedIpRange = new IpRange('10.180.0.0', '10.181.0.0');
         const occupiedCidrBlocks = ['10.180.0.0/16'];
-
         let expectedError;
 
         try {
@@ -36,6 +35,7 @@ describe.only('getAvailableCidrBlock', () => {
         } catch (error) {
             expectedError = error;
         }
+
         expectedError.should.exist;
     });
 });
