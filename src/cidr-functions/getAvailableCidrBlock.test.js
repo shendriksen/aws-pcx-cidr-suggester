@@ -1,5 +1,5 @@
 import getAvailableCidrBlock from './getAvailableCidrBlock';
-import IpRange from './cidr-functions/IpRange';
+import IpRange from './IpRange';
 
 describe('getAvailableCidrBlock', () => {
     it('should return an available cidr block when the reserved range is free', () => {

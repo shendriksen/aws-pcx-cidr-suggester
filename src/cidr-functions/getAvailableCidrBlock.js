@@ -1,8 +1,8 @@
-import isCidrInRange from './cidr-functions/isCidrInRange';
-import sortCidrAscending from './cidr-functions/sortCidrAscending';
-import getNextAddress from './cidr-functions/getNextAddress';
-import getEndAddress from './cidr-functions/getEndAddress';
-import cidrsAreOverlapping from './cidr-functions/cidrsAreOverlapping';
+import isCidrInRange from './isCidrInRange';
+import sortCidrAscending from './sortCidrAscending';
+import getNextAddress from './getNextAddress';
+import getEndAddress from './getEndAddress';
+import cidrsAreOverlapping from './cidrsAreOverlapping';
 
 export default function getAvailableCidrBlock(
     newCidrBlockSize,
