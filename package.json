@@ -36,6 +36,7 @@
     "lint": "./node_modules/.bin/eslint src/* --fix",
     "lint-staged": "lint-staged",
     "test": "nyc mocha -r chai/register-should --require babel-core/register './src/**/*.test.js'",
+    "test:unit": "mocha -r chai/register-should --require babel-core/register './src/**/*.test.js'",
     "prepare": "npm run build",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },
