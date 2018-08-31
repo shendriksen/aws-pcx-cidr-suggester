@@ -2,10 +2,14 @@
 import cidrOverlap from 'cidr-overlap';
 import isCidrInRange from './cidr-functions/isCidrInRange';
 import sortCidrAscending from './cidr-functions/sortCidrAscending';
-import {cidr} from 'node-cidr';
+import getNextAddress from './cidr-functions/getNextAddress';
+import getEndAddress from './cidr-functions/getEndAddress';
 
-export default function getAvailableCidrBlock(newCidrBlockSize, reservedIpRange, occupiedCidrBlocks) {
-
+export default function getAvailableCidrBlock(
+    newCidrBlockSize,
+    reservedIpRange,
+    occupiedCidrBlocks
+) {
     let newCidrStartAddress = reservedIpRange.startAddress;
     const sortedOccupiedCidrBlocks = sortCidrAscending(occupiedCidrBlocks);
 
@@ -13,13 +17,19 @@ export default function getAvailableCidrBlock(newCidrBlockSize, reservedIpRange,
         const isInRange = isCidrInRange(reservedIpRange, block);
 
         if (isInRange) {
-            const overlaps = cidrOverlap([block, newCidrStartAddress]).length > 0;
+            const overlaps =
+                cidrOverlap([block, newCidrStartAddress]).length > 0;
 
-            if(overlaps) newCidrStartAddress = cidr.next(block).split('/')[0];
+            if (overlaps) newCidrStartAddress = getNextAddress(block);
 
-            if(!isCidrInRange(reservedIpRange, newCidrStartAddress)) throw new Error('No availability in the range provided');
+            if (
+                !isCidrInRange(
+                    reservedIpRange,
+                    getEndAddress(`${newCidrStartAddress}/${newCidrBlockSize}`)
+                )
+            )
+                throw new Error('No availability in the range provided');
         }
     });
-
     return `${newCidrStartAddress}/${newCidrBlockSize}`;
 }
