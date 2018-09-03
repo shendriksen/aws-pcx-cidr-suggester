@@ -2,7 +2,9 @@ import util from 'util';
 
 const exec = util.promisify(require('child_process').exec);
 
-describe('index e2e tests', () => {
+describe('index e2e tests', function () {
+
+    this.slow(5000);
 
     it('should generate a free CIDR block', async () => {
         const command = 'node ./lib/index.js -b 24 -s 10.180.0.0 -e 10.200.0.0 -t FAKE-TAG-NAME -z FAKE-TAG-VALUE';
