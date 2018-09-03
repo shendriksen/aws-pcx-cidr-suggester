@@ -38,16 +38,18 @@
     "lint": "./node_modules/.bin/eslint src/* --fix",
     "lint-staged": "lint-staged",
     "test": "nyc mocha -r chai/register-should --require babel-core/register './src/**/*.test.js'",
-    "test:unit": "mocha -r chai/register-should --require babel-core/register './src/**/*.test.js'",
+    "test:unit": "mocha -r chai/register-should --require babel-core/register './src/**/*.test.js' --exclude './src/**/*.e2e.test.js'",
+    "test:e2e": "mocha -r chai/register-should --require babel-core/register './src/**/*.e2e.test.js'",
     "prepare": "npm run build",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },
   "nyc": {
     "include": [
-      "src/**/*.js"
+      "./src/**/*.js"
     ],
     "exclude": [
-      "src/**/*.test.js"
+      "./src/**/*.test.js",
+      "./src/index.js"
     ],
     "sourceMap": true,
     "instrument": true,

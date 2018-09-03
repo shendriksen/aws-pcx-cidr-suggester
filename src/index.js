@@ -13,4 +13,4 @@ cli({
         getOccupiedCidrBlocks(args.routeTableTagName, args.routeTableTagValue)
             .then(occupiedBlocks => getAvailableCidrBlock(args.blockSize, args.rangeStart, args.rangeEnd, occupiedBlocks)))
     .then(console.log)
-    .catch(error => console.error(error));
+    .catch(error => console.error(error.message));
