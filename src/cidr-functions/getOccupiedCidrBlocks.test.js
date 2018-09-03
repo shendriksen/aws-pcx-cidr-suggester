@@ -6,7 +6,7 @@ describe('getOccupiedCidrBlocks', () => {
 
     let sandbox;
 
-    beforeEach(() => sandbox = sinon.sandbox.create());
+    beforeEach(() => sandbox = sinon.createSandbox());
 
     afterEach(() => sandbox.restore());
 
