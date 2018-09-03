@@ -3,12 +3,12 @@ import AWS from 'aws-sdk';
 process.env.AWS_SDK_LOAD_CONFIG = 1;
 const ec2 = new AWS.EC2();
 
-function getRouteTables(options) {
+function getRouteTables(routeTableTagName, routeTableTagValue) {
     const params = {
         Filters: [
             {
-                Name: `tag:${options.tagName}`,
-                Values: [options.tagValue]
+                Name: `tag:${routeTableTagName}`,
+                Values: [routeTableTagValue]
             }
         ]
     };
@@ -31,6 +31,6 @@ function getRoutes(routeTables) {
     return Array.from(uniqueRoutes);
 }
 
-export default function getOccupiedCidrBlocks(options) {
-    return getRouteTables(options).then(getRoutes);
+export default function getOccupiedCidrBlocks(routeTableTagName, routeTableTagValue) {
+    return getRouteTables(routeTableTagName, routeTableTagValue).then(getRoutes);
 }

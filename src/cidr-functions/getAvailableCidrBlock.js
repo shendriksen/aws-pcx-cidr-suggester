@@ -3,12 +3,14 @@ import sortCidrAscending from './sortCidrAscending';
 import getNextAddress from './getNextAddress';
 import getEndAddress from './getEndAddress';
 import cidrsAreOverlapping from './cidrsAreOverlapping';
+import IpRange from './IpRange';
 
 export default function getAvailableCidrBlock(
     newCidrBlockSize,
-    reservedIpRange,
+    rangeStart, rangeEnd,
     occupiedCidrBlocks
 ) {
+    const reservedIpRange = new IpRange(rangeStart, rangeEnd);
     let newCidrStartAddress = reservedIpRange.startAddress;
     const sortedOccupiedCidrBlocks = sortCidrAscending(occupiedCidrBlocks);
 
