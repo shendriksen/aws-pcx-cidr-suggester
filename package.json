@@ -62,7 +62,8 @@
   },
   "pre-commit": [
     "precommit-msg",
-    "lint-staged"
+    "lint-staged",
+    "test:unit"
   ],
   "lint-staged": {
     "src/**/*.js": [
