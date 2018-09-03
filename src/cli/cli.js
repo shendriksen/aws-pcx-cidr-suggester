@@ -7,19 +7,19 @@ export default function cli(cliMeta) {
         const parser = new ArgumentParser(cliMeta);
 
         parser.addArgument(['-b', '--blockSize'], {
-            help: 'anticipated CIDR block size'
+            help: 'The anticipated CIDR block size'
         });
         parser.addArgument(['-s', '--rangeStart'], {
-            help: 'range start'
+            help: 'The start of the desired range for the new CIDR block'
         });
         parser.addArgument(['-e', '--rangeEnd'], {
-            help: 'range end'
+            help: 'The end of the desired range for the new CIDR block'
         });
-        parser.addArgument(['-t', '--routeTableTagName'], {
-            help: 'route table tag name'
+        parser.addArgument(['-n', '--routeTableTagName'], {
+            help: 'The tag name for the route table(s)'
         });
-        parser.addArgument(['-z', '--routeTableTagValue'], {
-            help: 'route table tag value'
+        parser.addArgument(['-x', '--routeTableTagValue'], {
+            help: 'The tag value for the route table(s)'
         });
 
         resolve(validateArguments(parser.parseArgs()));

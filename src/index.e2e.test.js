@@ -5,9 +5,10 @@ const exec = util.promisify(require('child_process').exec);
 describe('index e2e tests', function () {
 
     this.slow(5000);
+    this.timeout(5000);
 
     it('should generate a free CIDR block', async () => {
-        const command = 'node ./lib/index.js -b 24 -s 10.180.0.0 -e 10.200.0.0 -t FAKE-TAG-NAME -z FAKE-TAG-VALUE';
+        const command = 'node ./lib/index.js -b 24 -s 10.180.0.0 -e 10.200.0.0 -n FAKE-TAG-NAME -x FAKE-TAG-VALUE';
 
         const { stdout } = await exec(command);
 
