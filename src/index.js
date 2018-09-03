@@ -1,44 +1,22 @@
 #!/usr/bin/env node
-import { ArgumentParser } from 'argparse';
+
+import cli from './cli/cli';
 import getAvilableCidrBlock from './cidr-functions/getAvailableCidrBlock';
 import IpRange from './cidr-functions/IpRange';
 import getOccupiedCidrBlocks from './cidr-functions/getOccupiedCidrBlocks';
 
-var parser = new ArgumentParser({
-    version: '0.0.1',
-    addHelp: true,
-    description: 'Argparse example'
+cli({
+    cliMeta: {
+        version: '0.0.1',
+        addHelp: true,
+        description: 'DeCidr an available CIDR block for a peering connection.'
+    },
+    getAvailableBlock: (tagName, tagValue, blockSize, rangeStart, rangeEnd) => {
+        getOccupiedCidrBlocks({
+            tagName,
+            tagValue
+        })
+            .then(blocks => getAvilableCidrBlock(blockSize, new IpRange(rangeStart, rangeEnd), blocks))
+            .then(console.log);
+    }
 });
-parser.addArgument(['-b', '--blockSize'], {
-    help: 'anticipated CIDR block size'
-});
-parser.addArgument(['-s', '--rangeStart'], {
-    help: 'range start'
-});
-parser.addArgument(['-e', '--rangeEnd'], {
-    help: 'range end'
-});
-parser.addArgument(['-t', '--routeTableTagName'], {
-    help: 'route table tag name'
-});
-parser.addArgument(['-z', '--routeTableTagValue'], {
-    help: 'route table tag value'
-});
-
-var args = parser.parseArgs();
-console.dir(args);
-
-// argValidator(args);
-
-getOccupiedCidrBlocks({
-    tagName: args.routeTableTagName,
-    tagValue: args.routeTableTagValue
-})
-    .then(blocks =>
-        getAvilableCidrBlock(
-            args.blockSize,
-            new IpRange(args.rangeStart, args.rangeEnd),
-            blocks
-        )
-    )
-    .then(console.log);
