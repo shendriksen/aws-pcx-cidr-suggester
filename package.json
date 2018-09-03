@@ -7,10 +7,11 @@
   "author": "Sam Hendriksen <sam.hendriksen@ecs.co.uk>",
   "license": "MIT",
   "dependencies": {
+    "argparse": "^1.0.10",
     "aws-sdk": "^2.305.0",
-    "cidr-matcher": "^1.0.5",
     "cidr-overlap": "^0.0.4",
-    "ip-cidr": "^2.0.0"
+    "ip-cidr": "^2.0.0",
+    "node-cidr": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -26,25 +27,29 @@
     "eslint-plugin-prettier": "^2.6.0",
     "lint-staged": "^7.1.0",
     "mocha": "^5.1.0",
-    "nock": "^9.2.6",
     "nyc": "^11.7.1",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.12.1"
+    "prettier": "^1.12.1",
+    "sinon": "^6.1.5",
+    "sinon-chai": "^3.2.0"
   },
   "scripts": {
     "build": "babel src -d lib --copy-files",
     "lint": "./node_modules/.bin/eslint src/* --fix",
     "lint-staged": "lint-staged",
     "test": "nyc mocha -r chai/register-should --require babel-core/register './src/**/*.test.js'",
+    "test:unit": "mocha -r chai/register-should --require babel-core/register './src/**/*.test.js' --exclude './src/**/*.e2e.test.js'",
+    "test:e2e": "mocha -r chai/register-should --require babel-core/register './src/**/*.e2e.test.js'",
     "prepare": "npm run build",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },
   "nyc": {
     "include": [
-      "src/**/*.js"
+      "./src/**/*.js"
     ],
     "exclude": [
-      "src/**/*.test.js"
+      "./src/**/*.test.js",
+      "./src/index.js"
     ],
     "sourceMap": true,
     "instrument": true,
@@ -59,12 +64,16 @@
   },
   "pre-commit": [
     "precommit-msg",
-    "lint-staged"
+    "lint-staged",
+    "test:unit"
   ],
   "lint-staged": {
     "src/**/*.js": [
       "./node_modules/.bin/eslint src/* --fix",
       "git add"
     ]
+  },
+  "bin": {
+    "DeCidr": "./lib/index.js"
   }
 }
