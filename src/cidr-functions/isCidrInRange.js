@@ -5,8 +5,8 @@ export default function isInRange(reservedRange, block) {
 }
 
 function startAddressIsInRange(reservedRange, block) {
-    const blockStartOctets = new IpCidr(block).start().split('.'); //10.180.0.0
-    const reservedStartOctets = reservedRange.startAddress.split('.'); //10.180.0.0
+    const blockStartOctets = new IpCidr(block).start().split('.');
+    const reservedStartOctets = reservedRange.startAddress.split('.');
 
     for (let i = 0; i < blockStartOctets.length; i++) {
         if (blockStartOctets[i] < reservedStartOctets[i]) return false;
@@ -16,8 +16,8 @@ function startAddressIsInRange(reservedRange, block) {
 }
 
 function endAddressIsInRange(reservedRange, block) {
-    const blockEndOctets = new IpCidr(block).end().split('.'); //10.200.0.0
-    const reservedEndOctets = reservedRange.endAddress.split('.'); //10.200.0.0
+    const blockEndOctets = new IpCidr(block).end().split('.');
+    const reservedEndOctets = reservedRange.endAddress.split('.');
 
     for (let i = 0; i < blockEndOctets.length; i++) {
         if (blockEndOctets[i] > reservedEndOctets[i]) return false;

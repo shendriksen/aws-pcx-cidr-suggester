@@ -1,19 +1,18 @@
-import AWS from 'aws-sdk';
+import {
+    EC2
+} from '../helpers/aws';
 
 process.env.AWS_SDK_LOAD_CONFIG = 1;
-const ec2 = new AWS.EC2();
 
 function getRouteTables(routeTableTagName, routeTableTagValue) {
     const params = {
-        Filters: [
-            {
-                Name: `tag:${routeTableTagName}`,
-                Values: [routeTableTagValue]
-            }
-        ]
+        Filters: [{
+            Name: `tag:${routeTableTagName}`,
+            Values: [routeTableTagValue]
+        }]
     };
 
-    return ec2
+    return EC2()
         .describeRouteTables(params)
         .promise()
         .then(result => result.RouteTables);
