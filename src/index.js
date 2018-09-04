@@ -3,11 +3,12 @@
 import cli from './cli/cli';
 import getAvailableCidrBlock from './cidr-functions/getAvailableCidrBlock';
 import getOccupiedCidrBlocks from './cidr-functions/getOccupiedCidrBlocks';
+import { version, description } from '../package.json';
 
 cli({
-    version: '0.0.1',
+    version,
     addHelp: true,
-    description: 'DeCidr an available CIDR block for a peering connection.'
+    description
 })
     .then(args =>
         getOccupiedCidrBlocks(args.routeTableTagName, args.routeTableTagValue)
