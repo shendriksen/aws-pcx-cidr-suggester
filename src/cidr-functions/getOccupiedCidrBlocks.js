@@ -4,11 +4,11 @@ import {
 
 process.env.AWS_SDK_LOAD_CONFIG = 1;
 
-function getRouteTables(routeTableTagName, routeTableTagValue) {
+function getRouteTables(tagName, tagValue) {
     const params = {
         Filters: [{
-            Name: `tag:${routeTableTagName}`,
-            Values: [routeTableTagValue]
+            Name: `tag:${tagName}`,
+            Values: [tagValue]
         }]
     };
 
@@ -30,6 +30,6 @@ function getRoutes(routeTables) {
     return Array.from(uniqueRoutes);
 }
 
-export default function getOccupiedCidrBlocks(routeTableTagName, routeTableTagValue) {
-    return getRouteTables(routeTableTagName, routeTableTagValue).then(getRoutes);
+export default function getOccupiedCidrBlocks(tagName, tagValue) {
+    return getRouteTables(tagName, tagValue).then(getRoutes);
 }
