@@ -8,7 +8,7 @@ DeCidr is a Node.js application that generates a non-clashing CIDR block to be u
 
 Let's say you have a VPC called 'Backend' and you would like to peer many 'Front End' VPCs to it. To do this you can use 'Peering Connections' from AWS, which require non-clashing CIDR blocks. For each peering connection you will need to ensure the CIDR block does not clash with the backend CIDR block, or any of the other peerings.
 
-Before creating your new VPC DeCidr will read your 'Backend' VPC's Route Table(s) to determine what CIDR ranges are taken. It will then provide you with a valid, non-clashing CIDR range to use for your new front end VPC.
+Before creating your new VPC, DeCidr will read your 'Backend' VPC's Route Table(s) to determine what CIDR ranges are taken. It will then provide you with a valid, non-clashing CIDR range, to use on your new front end VPC.
 
 ## Installation
 
@@ -34,7 +34,7 @@ Output:
 
 `-v --version` - Prints the version of DeCidr
 
-`-h --help` - Provides parameter help information
+`-h --help` - Provides tool help information
 
 ## Development
 
