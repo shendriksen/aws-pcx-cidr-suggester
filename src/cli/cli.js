@@ -15,10 +15,10 @@ export default function cli(cliMeta) {
         parser.addArgument(['-e', '--rangeEnd'], {
             help: 'The end of the desired range for the new CIDR block'
         });
-        parser.addArgument(['-n', '--routeTableTagName'], {
+        parser.addArgument(['-n', '--tagName'], {
             help: 'The tag name for the route table(s)'
         });
-        parser.addArgument(['-x', '--routeTableTagValue'], {
+        parser.addArgument(['-x', '--tagValue'], {
             help: 'The tag value for the route table(s)'
         });
 
@@ -33,8 +33,8 @@ function validateArguments(args) {
     if (args.blockSize == null) errors.push('blockSize');
     if (args.rangeStart == null) errors.push('rangeStart');
     if (args.rangeEnd == null) errors.push('rangeEnd');
-    if (args.routeTableTagName == null) errors.push('routeTableTagName');
-    if (args.routeTableTagValue == null) errors.push('routeTableTagValue');
+    if (args.tagName == null) errors.push('tagName');
+    if (args.tagValue == null) errors.push('tagValue');
 
     if (errors.length > 0) throw new Error(`Please provide all arguments (${errors})`);
 

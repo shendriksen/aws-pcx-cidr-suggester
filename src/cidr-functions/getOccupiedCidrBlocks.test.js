@@ -12,8 +12,8 @@ describe('getOccupiedCidrBlocks', () => {
 
     it('should return the occupied cidr blocks', async () => {
         // Setup.
-        const routeTableTagName = 'Name';
-        const routeTableTagValue = 'nu-cps-platform-tnl-uat-private*-rtb';
+        const tagName = 'Name';
+        const tagValue = 'nu-cps-platform-tnl-uat-private*-rtb';
         const expectedBlocks = ['0.0.0.0/0', '10.180.0.0/16', '10.180.1.0/16'];
 
         const mockData = {
@@ -39,7 +39,7 @@ describe('getOccupiedCidrBlocks', () => {
         });
 
         // Exercise.
-        const occupiedBlocks = await getOccupiedCidrBlocks(routeTableTagName, routeTableTagValue);
+        const occupiedBlocks = await getOccupiedCidrBlocks(tagName, tagValue);
 
         // Verify.
         occupiedBlocks.should.deep.equal(expectedBlocks);
@@ -47,8 +47,8 @@ describe('getOccupiedCidrBlocks', () => {
 
     it('should return an error when there are network issues', async () => {
         // Setup.
-        const routeTableTagName = 'Name';
-        const routeTableTagValue = 'nu-cps-platform-tnl-uat-private*-rtb';
+        const tagName = 'Name';
+        const tagValue = 'nu-cps-platform-tnl-uat-private*-rtb';
 
         sandbox.stub(aws, 'EC2').returns({
             describeRouteTables: () => ({
@@ -59,7 +59,7 @@ describe('getOccupiedCidrBlocks', () => {
         // Exercise.
         let expectedError;
         try {
-            await getOccupiedCidrBlocks(routeTableTagName, routeTableTagValue);
+            await getOccupiedCidrBlocks(tagName, tagValue);
         } catch (error) {
             expectedError = error;
         }

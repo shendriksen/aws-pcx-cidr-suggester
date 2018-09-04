@@ -20,7 +20,7 @@ To use the tool you will need to provide all of the below required values. When 
 
 Verbose: 
 
-`DeCidr --blockSize 24 --rangeStart 10.180.0.0 --rangeEnd 10.200.0.0 --routeTableTagName Name --routeTableTagValue private*-rtb`
+`DeCidr --blockSize 24 --rangeStart 10.180.0.0 --rangeEnd 10.200.0.0 --tagName Name --tagValue private*-rtb`
 
 Minimal:
 

@@ -20,6 +20,6 @@ describe('index e2e tests', function () {
 
         const { stderr } = await exec(command);
 
-        stderr.should.equal('Please provide all arguments (blockSize,rangeStart,rangeEnd,routeTableTagName,routeTableTagValue)\n');
+        stderr.should.equal('Please provide all arguments (blockSize,rangeStart,rangeEnd,tagName,tagValue)\n');
     });
 });
