@@ -1,7 +1,7 @@
 {
   "name": "aws-pcx-cidr-suggester",
-  "version": "0.0.1",
-  "description": "Suggest an available cidr range for a peering connection",
+  "version": "1.0.0",
+  "description": "Suggests an available cidr range for a peering connection",
   "main": "lib/index.js",
   "repository": "git@github.com:shendriksen/aws-pcx-cidr-suggester.git",
   "author": "Sam Hendriksen <sam.hendriksen@ecs.co.uk>",
